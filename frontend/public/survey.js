@@ -438,9 +438,9 @@ async function submitSurvey(e) {
     submitBtn.innerHTML = '<span class="loading-spinner"></span> Processing...';
 
     try {
-        // Send to backend API (use window.location.origin for dynamic URL)
-        const API_BASE = window.location.origin;
-        const response = await fetch(`${API_BASE}/api/survey/submit`, {
+        // Send to backend API (centralized endpoint config)
+        const submitEndpoint = typeof API !== 'undefined' ? API.SUBMIT_SURVEY : `${window.location.origin}/api/survey/submit`;
+        const response = await fetch(submitEndpoint, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
