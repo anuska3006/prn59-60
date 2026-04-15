@@ -30,7 +30,7 @@ function resolveApiBaseUrl() {
   }
 
   const metaTag = document.querySelector('meta[name="api-base-url"]');
-  if (metaTag?.content) {
+  if (metaTag && metaTag.tagName === 'META' && metaTag.content) {
     const safeMetaUrl = normalizeAndValidateUrl(metaTag.content.trim());
     if (safeMetaUrl) {
       return safeMetaUrl;
