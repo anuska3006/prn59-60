@@ -157,8 +157,8 @@ async function loadAssessmentData() {
     if (resultId) {
         console.log('Fetching result from API:', resultId);
         try {
-            const API_BASE = window.location.origin;
-            const response = await fetch(`${API_BASE}/api/results/${resultId}`);
+            const resultEndpoint = typeof API !== 'undefined' ? API.GET_RESULTS(resultId) : `${window.location.origin}/api/results/${resultId}`;
+            const response = await fetch(resultEndpoint);
             if (response.ok) {
                 const data = await response.json();
                 console.log('API Response:', data);
