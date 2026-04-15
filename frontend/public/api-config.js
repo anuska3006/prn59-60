@@ -8,15 +8,33 @@
 // 2) <meta name="api-base-url" content="https://api.example.com">
 // 3) localhost fallback for local split setup
 // 4) same-origin default for reverse-proxy/single-domain setup
+function normalizeAndValidateUrl(value) {
+  try {
+    const parsed = new URL(value);
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+      return null;
+    }
+    return parsed.origin;
+  } catch {
+    return null;
+  }
+}
+
 function resolveApiBaseUrl() {
   const runtimeConfig = window.__API_BASE_URL;
   if (runtimeConfig && typeof runtimeConfig === 'string') {
-    return runtimeConfig.replace(/\/$/, '');
+    const safeRuntimeUrl = normalizeAndValidateUrl(runtimeConfig.trim());
+    if (safeRuntimeUrl) {
+      return safeRuntimeUrl;
+    }
   }
 
   const metaTag = document.querySelector('meta[name="api-base-url"]');
   if (metaTag?.content) {
-    return metaTag.content.trim().replace(/\/$/, '');
+    const safeMetaUrl = normalizeAndValidateUrl(metaTag.content.trim());
+    if (safeMetaUrl) {
+      return safeMetaUrl;
+    }
   }
 
   const host = window.location.hostname;
