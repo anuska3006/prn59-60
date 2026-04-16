@@ -321,6 +321,12 @@ docker-compose up -d
 3. **ML Service:** Deploy as separate container
 4. **Frontend:** Deploy to Vercel/Netlify or S3 + CloudFront
 
+### GitHub Pages (Frontend)
+1. Push changes to `main` or `master`.
+2. In GitHub, open **Settings → Pages** and set **Source** to **GitHub Actions**.
+3. Workflow `.github/workflows/deploy-github-pages.yml` will deploy `frontend/public` automatically.
+4. If backend runs on another domain, add `<meta name="api-base-url" content="https://your-backend-domain">` in frontend pages so API calls resolve correctly.
+
 See `docs/deployment/DEPLOYMENT_GUIDE.md` for detailed instructions.
 
 ---
@@ -393,4 +399,3 @@ MIT License — See LICENSE file for details
 → Read **SRS.md** for complete requirements
 → See **PROJECT_STRUCTURE.md** for file breakdown
 → Check **docs/** for architecture & deployment
-
