@@ -325,7 +325,7 @@ docker-compose up -d
 1. Push changes to `main` or `master`.
 2. In GitHub, open **Settings → Pages** and set **Source** to **GitHub Actions**.
 3. Workflow `.github/workflows/deploy-github-pages.yml` will deploy `frontend/public` automatically.
-4. If backend runs on another domain, add `<meta name="api-base-url" content="https://your-backend-domain">` in frontend pages so API calls resolve correctly.
+4. If backend runs on another domain, add `<meta name="api-base-url" content="https://your-backend-domain">` in frontend pages (already supported by `frontend/public/api-config.js`) so API calls resolve correctly.
 
 See `docs/deployment/DEPLOYMENT_GUIDE.md` for detailed instructions.
 
